@@ -31,6 +31,8 @@
                 height: 100px;
                 cursor: pointer;
                 transform-style: preserve-3d;
+                transform-box: fill-box;
+                transform-origin: 50% 0;
             }
             .side {
                 width: 100%;
@@ -45,7 +47,7 @@
             }
             .tail {
                 background: url('./face-pile-sprites100px.webp') -0 -0;
-                transform: rotateX(-180deg);
+                transform: rotateY(-180deg);
             }
 
             .flipHead {
@@ -66,19 +68,19 @@
 
             @keyframes resultHead {
                 from {
-                    transform: rotateX(0);
+                    transform: rotateY(0);
                 }
                 to {
-                    transform: rotateX(1800deg);
+                    transform: rotateY(1800deg);
                 }
             }
 
             @keyframes resultTail {
                 from {
-                    transform: rotateX(0);
+                    transform: rotateY(0);
                 }
                 to {
-                    transform: rotateX(1980deg);
+                    transform: rotateY(1980deg);
                 }
             }
         </style>
