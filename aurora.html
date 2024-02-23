@@ -2,7 +2,10 @@
     <head>
         <style type="text/css">
             body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                font-family: system-ui, sans-serif;
+                font-weight: normal;
+                color: dimgray;
+
             }
             .container {
                 display:flex;
@@ -12,20 +15,68 @@
             }
             h1 {
                 margin-bottom: 0;
+                font-weight: 300;
             }
             img {
                 max-width: 800px;
                 margin-bottom: 50px;
             }
-
+            a {
+                position: relative;
+            }
+            .lds-ring img {
+                opacity: 0.5;
+            }
+            .lds-ring.white-ring span {
+                border-color: white transparent transparent transparent;
+            }
+            .lds-ring span {
+                box-sizing: border-box;
+                display: block;
+                position: absolute;
+                width: 64px;
+                height: 64px;
+                margin: 8px;
+                border: 8px solid red;
+                border-radius: 50%;
+                animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                border-color: dimgray transparent transparent transparent;
+                z-index: 2;
+                top: calc(50% - 32px);
+                left: calc(50% - 32px);
+            }
+            .lds-ring span:nth-child(1) {
+                animation-delay: -0.45s;
+            }
+            .lds-ring span:nth-child(2) {
+                animation-delay: -0.3s;
+            }
+            .lds-ring span:nth-child(3) {
+                animation-delay: -0.15s;
+            }
+            @keyframes lds-ring {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <h1>Space Weather Forecast</h1>
             <p>Cliquez sur les images pour plus d'informations</p>
-            <a href="https://spaceweather.gfz-potsdam.de"><img src="https://spaceweather.gfz-potsdam.de/fileadmin/Kp-Forecast/KP_ENSEMBLE_LAST_PAGER_SWIFT.png"/></a>
-            <a href="https://www.swpc.noaa.gov"><img src="https://services.swpc.noaa.gov/images/aurora-forecast-northern-hemisphere.jpg"/></a>
+            <a href="https://spaceweather.gfz-potsdam.de"><img src="https://spaceweather.gfz-potsdam.de/fileadmin/Kp-Forecast/KP_ENSEMBLE_LAST_PAGER_SWIFT.png"/><span></span><span></span><span></span><span></span></a>
+            <a class="white-ring" href="https://www.swpc.noaa.gov"><img src="https://services.swpc.noaa.gov/images/aurora-forecast-northern-hemisphere.jpg"/><span></span><span></span><span></span><span></span></a>
         </div>
+        <script>
+            document.querySelectorAll('.container>a').forEach(function (el) {
+                el.addEventListener('click', ev => {
+                    el.classList.add('lds-ring');
+                });
+            });
+        </script>
     </body>
 </html>
