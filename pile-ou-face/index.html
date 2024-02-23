@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <style type="text/css">
+            body {
+                /*font-family: system-ui, sans-serif;*/
+                font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+                font-weight: normal;
+                color: gray;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+            h1 {
+                margin: 0 0 1rem 0;
+                font-weight: normal;
+                text-align: center;
+            }
+            small {
+                display: block;
+                margin-top: 1.5rem;
+                text-align: center;
+            }
+            #coin {
+                position: relative;
+                margin: 0 auto;
+                width: 100px;
+                height: 100px;
+                cursor: pointer;
+                transition: transform 1s ease-in;
+                transform-style: preserve-3d;
+            }
+            .side {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                position: absolute;
+                backface-visibility: hidden;
+            }
+            .head {
+                background: url('./face-pile-sprites100px.webp') -100px -0;
+                z-index: 10;
+            }
+            .tail {
+                background: url('./face-pile-sprites100px.webp') -0 -0;
+                transform: rotateX(-180deg);
+            }
+
+            .flipHead {
+                animation: resultHead 2s ease-out forwards;
+            }
+            .flipTail {
+                animation: resultTail 2s ease-out forwards;
+            }
+            .fadeOut, .fadeIn {
+                transition: opacity 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
+            }
+            .fadeOut {
+                opacity: 0;
+            }
+            .fadeIn {
+                opacity: 1;
+            }
+
+            @keyframes resultHead {
+                from {
+                    transform: rotateX(0);
+                }
+                to {
+                    transform: rotateX(1800deg);
+                }
+            }
+
+            @keyframes resultTail {
+                from {
+                    transform: rotateX(0);
+                }
+                to {
+                    transform: rotateX(1980deg);
+                }
+            }
+        </style>
+    </head>
+    <body onload="flip()">
+        <div class="container">
+            <div>
+                <h1>Pile ou Face</h1>
+                <div id="coin">
+                    <div class="side head"></div>
+                    <div class="side tail"></div>
+                </div>
+                <small>cliquez sur la pièce pour relancer</small>
+            </div>
+        </div>
+        <script>
+            let coin = document.getElementById("coin");
+            let help = document.querySelector('small');
+            let title = document.querySelector('h1');
+            function flip(e) {
+                coin.removeEventListener("click", this);
+                title.textContent = "Pile ou Face";
+                help.style.visibility = "hidden";
+                const flipResult = (Math.random() <0.5) ? 'head' : 'tail';
+                coin.className = 'flip' + flipResult.charAt(0).toUpperCase() + flipResult.slice(1);
+                setTimeout(() => {
+                    title.textContent = (flipResult === 'head') ? 'Pile' : 'Face';
+                }, 1700);
+                setTimeout(() => {
+                    coin.className = flipResult;
+                    coin.addEventListener("click", this);
+                    help.style.visibility = "";
+                }, 2100);
+            }
+            coin.addEventListener("click", flip);
+        </script>
+    </body>
+</html>
