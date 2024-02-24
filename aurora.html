@@ -70,9 +70,31 @@
                     transform: rotate(360deg);
                 }
             }
+            header {
+                position: sticky;
+                top: 0px;
+                background-color: lightgoldenrodyellow;
+                padding: 0.25em;
+                border: 1px dotted gold;
+                border-radius: 5px;
+                margin: auto;
+                max-width: 800px;
+                z-index: 2;
+            }
+            svg {
+                vertical-align: text-bottom;
+                display: inline-block;
+                margin-right: 0.5ch;
+            }
         </style>
     </head>
     <body>
+        <svg style="display: none;">
+            <symbol id="info-symbol" stroke-width='8' stroke-dashoffset='0' stroke-dasharray='0' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 100 100'>
+                <g transform="rotate(180, 50, 50)"><circle fill="none" cx="50" cy="50" r="40"/><line x1="50" y1="30" x2="50" y2="52" /><circle cx="50" cy="68" r="1"/></g>
+            </symbol>
+        </svg>
+        <header><svg style="stroke:black; height:20px; width:20px;"><use xlink:href="#info-symbol"></use></svg>Cette page permet de valider les données d'OFP2MAP présentes dans les éphémérides</header>
         <div class="container">
             <h1>Space Weather Forecast</h1>
             <p>Cliquez sur les images pour plus d'informations</p>

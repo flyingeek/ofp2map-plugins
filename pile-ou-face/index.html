@@ -10,7 +10,7 @@
                 font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
                 font-weight: normal;
                 color: gray;
-                margin: 0;
+                margin: 0 10px;
             }
             .container {
                 display: flex;
@@ -19,7 +19,16 @@
                 height: 100vh;
                 user-select: none;
                 -webkit-user-select: none;
+                max-width: 800px;
+                flex-direction: column;
+                margin-left: auto;
+                margin-right:auto;
             }
+            .container>div {
+                margin-top: auto;
+                margin-bottom:auto;
+            }
+
             h1 {
                 margin: 0 0 1rem 0;
                 font-weight: normal;
@@ -42,6 +51,7 @@
                 touch-action: none;
                 -webkit-touch-callout: none;
                 -webkit-user-drag: none;
+                border-radius: 50%;
             }
             .side {
                 width: 100%;
@@ -92,9 +102,32 @@
                     transform: rotateY(1980deg);
                 }
             }
+            footer {
+                bottom: 0.25em;
+                background-color: lightgoldenrodyellow;
+                padding: 0.25em;
+                border: 1px dotted gold;
+                border-radius: 5px;
+                width: 100%;
+                text-align: center;
+                z-index: 2;
+                display: block;
+                margin-bottom: max(15px, env(safe-area-inset-bottom));
+            }
+            svg {
+                vertical-align: text-bottom;
+                display: inline-block;
+                margin-right: 0.5ch;
+            }
         </style>
     </head>
     <body onload="flip()">
+        <svg style="display: none;">
+            <symbol id="info-symbol" stroke-width='8' stroke-dashoffset='0' stroke-dasharray='0' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 100 100'>
+                <g transform="rotate(180, 50, 50)"><circle fill="none" cx="50" cy="50" r="40"/><line x1="50" y1="30" x2="50" y2="52" /><circle cx="50" cy="68" r="1"/></g>
+            </symbol>
+        </svg>
+
         <div class="container">
             <div>
                 <h1>Pile ou Face</h1>
@@ -104,6 +137,7 @@
                 </div>
                 <small>cliquez sur la pièce pour relancer</small>
             </div>
+            <footer><svg style="stroke:black; height:20px; width:20px;"><use xlink:href="#info-symbol"></use></svg>OFP2MAP, même hors-ligne, affiche un tirage aléatoire dans le menu plugin</footer>
         </div>
         <script>
             let coin = document.getElementById("coin");
