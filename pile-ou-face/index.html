@@ -14,19 +14,19 @@
             }
             .container {
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 height: 100vh;
                 user-select: none;
                 -webkit-user-select: none;
                 max-width: 800px;
-                flex-direction: column;
                 margin-left: auto;
-                margin-right:auto;
+                margin-right: auto;
+                text-align: center;
             }
-            .container>div {
-                margin-top: auto;
-                margin-bottom:auto;
+            .container>div{
+                margin-bottom: auto;
             }
 
             h1 {
@@ -102,17 +102,16 @@
                     transform: rotateY(1980deg);
                 }
             }
-            footer {
-                bottom: 0.25em;
+            header {
                 background-color: lightgoldenrodyellow;
                 padding: 0.25em;
                 border: 1px dotted gold;
                 border-radius: 5px;
-                width: 100%;
-                text-align: center;
-                z-index: 2;
-                display: block;
-                margin-bottom: max(15px, env(safe-area-inset-bottom));
+                /* margin: auto 0 auto 0; */
+                max-width: 800px;
+                /* z-index: 2; */
+                margin-top: 8px;
+                margin-bottom: auto;
             }
             svg {
                 vertical-align: text-bottom;
@@ -129,6 +128,7 @@
         </svg>
 
         <div class="container">
+            <header><svg style="stroke:black; height:20px; width:20px;"><use xlink:href="#info-symbol"></use></svg>OFP2MAP, même hors-ligne, affiche un tirage aléatoire dans le menu plugin</header>
             <div>
                 <h1>Pile ou Face</h1>
                 <div id="coin">
@@ -137,7 +137,6 @@
                 </div>
                 <small>cliquez sur la pièce pour relancer</small>
             </div>
-            <footer><svg style="stroke:black; height:20px; width:20px;"><use xlink:href="#info-symbol"></use></svg>OFP2MAP, même hors-ligne, affiche un tirage aléatoire dans le menu plugin</footer>
         </div>
         <script>
             let coin = document.getElementById("coin");
