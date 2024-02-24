@@ -80,12 +80,19 @@
             <a class="white-ring" href="https://www.swpc.noaa.gov"><img src="https://services.swpc.noaa.gov/images/aurora-forecast-northern-hemisphere.jpg"/><span></span><span></span><span></span><span></span></a>
         </div>
         <script>
-            window.addEventListener("load", (event) => {
+            document.addEventListener("DOMContentLoaded", (event) => {
                 document.querySelectorAll('.container>a').forEach(function (el) {
-                    el.classList.remove('lds-ring');
                     el.addEventListener('click', ev => {
                         el.classList.add('lds-ring');
                     });
+                });
+            });
+            window.addEventListener('pageshow', function (event) {
+                if (!event.persisted) {
+                    return;
+                }
+                document.querySelectorAll('.container>a').forEach(function (el) {
+                    el.classList.remove('lds-ring');
                 });
             });
         </script>
