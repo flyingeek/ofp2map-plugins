@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Pile ou Face</title>
         <style type="text/css">
+            /* we need the body to have a height to use min-height on container */
+            html, body {height: 100%}
             body {
                 /* @see modernfontstacks.com */
                 font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
@@ -14,6 +16,7 @@
             }
             .container {
                 --hint-x-margin: 10px;
+                --hint-y-margin: calc(10px + env(safe-area-inset-bottom, 0));
                 display: grid;
                 user-select: none;
                 -webkit-user-select: none;
@@ -21,11 +24,8 @@
                 grid-template-columns: minmax(auto, 840px);
                 grid-template-rows: 1fr auto;
                 justify-content: center;
-                /*
-                  if dvh not supported, use vh
-                  on ipad use safe margin at the bottom
-                */
-                height: calc(min(100vh, 100dvh) - max(var(--hint-x-margin), env(safe-area-inset-bottom)));
+                min-height: 100%;
+                /*height: 100svh; /* alternative to min-height */
             }
             .draw-wrapper {
                 margin-top: auto;
@@ -70,7 +70,7 @@
                 padding: 0.25em;
                 border: 1px dotted gold;
                 border-radius: 5px;
-                margin: 0 var(--hint-x-margin);
+                margin: var(--hint-y-margin) var(--hint-x-margin);
             }
             .hint svg:first-child {
                 vertical-align: text-bottom;
