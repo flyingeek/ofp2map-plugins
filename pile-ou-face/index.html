@@ -6,38 +6,37 @@
         <title>Pile ou Face</title>
         <style type="text/css">
             body {
-                /*font-family: system-ui, sans-serif;*/
+                /* @see modernfontstacks.com */
                 font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
                 font-weight: normal;
                 color: gray;
-                margin: 0 10px;
+                margin: 0;
             }
             .container {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
+                --hint-x-margin: 10px;
+                display: grid;
                 user-select: none;
                 -webkit-user-select: none;
-                max-width: 800px;
-                margin-left: auto;
-                margin-right: auto;
                 text-align: center;
+                grid-template-columns: minmax(auto, 840px);
+                grid-template-rows: 1fr auto;
+                justify-content: center;
+                /*
+                  if dvh not supported, use vh
+                  on ipad use safe margin at the bottom
+                */
+                height: calc(min(100vh, 100dvh) - max(var(--hint-x-margin), env(safe-area-inset-bottom)));
             }
-            .container>div{
+            .draw-wrapper {
+                margin-top: auto;
                 margin-bottom: auto;
             }
-
             h1 {
-                margin: 0 0 1rem 0;
                 font-weight: normal;
-                text-align: center;
             }
             small {
                 display: block;
-                margin: 1.5rem 0 2rem 0;
-                text-align: center;
+                margin-top: 1.5rem;
             }
             #coin {
                 position: relative;
@@ -49,9 +48,7 @@
                 transform-box: fill-box;
                 transform-origin: 50% 0;
                 touch-action: none;
-                -webkit-touch-callout: none;
                 -webkit-user-drag: none;
-                border-radius: 50%;
             }
             .side {
                 width: 100%;
@@ -68,21 +65,26 @@
                 background: url('./face-pile-sprites100px.webp') -0 -0;
                 transform: rotateY(-180deg);
             }
-
+            .hint {
+                background-color: lightgoldenrodyellow;
+                padding: 0.25em;
+                border: 1px dotted gold;
+                border-radius: 5px;
+                margin: 0 var(--hint-x-margin);
+            }
+            .hint svg:first-child {
+                vertical-align: text-bottom;
+                display: inline-block;
+                margin-right: 0.5ch;
+                stroke:black;
+                height:20px;
+                width:20px;
+            }
             .flipHead {
                 animation: resultHead 2s ease-out forwards;
             }
             .flipTail {
                 animation: resultTail 2s ease-out forwards;
-            }
-            .fadeOut, .fadeIn {
-                transition: opacity 300ms cubic-bezier(0.55, 0.085, 0.68, 0.53);
-            }
-            .fadeOut {
-                opacity: 0;
-            }
-            .fadeIn {
-                opacity: 1;
             }
 
             @keyframes resultHead {
@@ -102,25 +104,9 @@
                     transform: rotateY(1980deg);
                 }
             }
-            header {
-                background-color: lightgoldenrodyellow;
-                padding: 0.25em;
-                border: 1px dotted gold;
-                border-radius: 5px;
-                /* margin: auto 0 auto 0; */
-                max-width: 800px;
-                /* z-index: 2; */
-                margin-top: 8px;
-                margin-bottom: auto;
-            }
-            svg {
-                vertical-align: text-bottom;
-                display: inline-block;
-                margin-right: 0.5ch;
-            }
         </style>
     </head>
-    <body onload="flip()">
+    <body>
         <svg style="display: none;">
             <symbol id="info-symbol" stroke-width='8' stroke-dashoffset='0' stroke-dasharray='0' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 100 100'>
                 <g transform="rotate(180, 50, 50)"><circle fill="none" cx="50" cy="50" r="40"/><line x1="50" y1="30" x2="50" y2="52" /><circle cx="50" cy="68" r="1"/></g>
@@ -128,8 +114,7 @@
         </svg>
 
         <div class="container">
-            <header><svg style="stroke:black; height:20px; width:20px;"><use xlink:href="#info-symbol"></use></svg>OFP2MAP affiche aussi Pile ou Face de manière aléatoire dans son menu plugin</header>
-            <div>
+            <div class="draw-wrapper">
                 <h1>Pile ou Face</h1>
                 <div id="coin">
                     <div class="side head"></div>
@@ -137,7 +122,12 @@
                 </div>
                 <small>cliquez sur la pièce pour relancer</small>
             </div>
+            <p class="hint">
+                <svg><use xlink:href="#info-symbol"></use></svg>
+                OFP2MAP affiche aussi Pile ou Face de manière aléatoire dans son menu plugin
+            </p>
         </div>
+
         <script>
             let coin = document.getElementById("coin");
             let help = document.querySelector('small');
@@ -158,6 +148,7 @@
                 }, 2100);
             }
             coin.addEventListener("click", flip);
+            window.addEventListener('load', flip);
         </script>
     </body>
 </html>
