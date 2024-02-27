@@ -14,12 +14,15 @@
                 color: gray;
                 margin: 0;
             }
+            body>svg {
+                display: none;
+            }
             .container {
                 --hint-x-margin: 10px;
                 --hint-y-margin: calc(10px + env(safe-area-inset-bottom, 0));
                 display: grid;
-                user-select: none;
                 -webkit-user-select: none;
+                user-select: none;
                 text-align: center;
                 grid-template-columns: minmax(auto, 840px);
                 grid-template-rows: 1fr auto;
@@ -107,7 +110,7 @@
         </style>
     </head>
     <body>
-        <svg style="display: none;">
+        <svg>
             <symbol id="info-symbol" stroke-width='8' stroke-dashoffset='0' stroke-dasharray='0' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 100 100'>
                 <g transform="rotate(180, 50, 50)"><circle fill="none" cx="50" cy="50" r="40"/><line x1="50" y1="30" x2="50" y2="52" /><circle cx="50" cy="68" r="1"/></g>
             </symbol>
